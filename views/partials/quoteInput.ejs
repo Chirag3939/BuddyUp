@@ -1,0 +1,107 @@
+<style>
+ 
+  #quoteInput{
+transform: translateX(120%);
+
+  }
+
+  #quoteInput.visible{
+transform: translateX(0);
+z-index: 20;
+  }
+</style>
+  <div id="quoteInput" style="z-index: 10;" class="fixed left-5 right-5 top-5 h-fit transition-transform duration-700 ease-in-out  flex flex-col rounded-md justify-start items-center px-1 bg-blm  py-2 ">
+    <div class="flex flex-col w-full justify-center items-center   rounded-md py-2 bg-blm ">
+    
+    
+      <div id="quote" class=" flex flex-col relative w-full h py-2 min-h-40 text-black rounded-lg overflow-hidden px-2 gap-2">
+       <div class="text-sm w-full">Write your post bellow...</div>
+        <p   id="message" contenteditable="true"  class="bg-transparent cursor-text outline-none  rounded-md min-h-32  z-10 px-2 py-1 text-xs  border-2 border-blb ">
+        </p>
+      </div>
+    </div>
+    <div class="flex flex-col rounded-md px-2  w-full">
+      <h1 id="char-count" class="text-xs text-end ">0/140 Characters</h1>
+    </div>
+    <div class="p-2 text-blm justify-center gap-5 text-xs w-full flex">
+      <button id="cancelQuote" class="px-3 py-1 bg-blh border border-black text-black rounded-full">
+        Cancel
+      </button>
+      <button id="postQuote" class="px-3 py-1 bg-blf rounded-full text-blm">POST</button>
+    </div>
+  </div>
+
+
+
+<script>
+
+  const charCount = document.getElementById("char-count");
+  const quote = document.getElementById('quote');
+  const quoteInput = document.getElementById('quoteInput');
+  const postQuote = document.getElementById('postQuote');
+  const cancelQuote = document.getElementById('cancelQuote');
+  
+
+  const message = document.getElementById('message');
+  message.addEventListener('click',(event)=>{
+    allowSelection = true;
+  })
+
+ 
+
+// cancel quote
+
+cancelQuote.addEventListener('click',(event)=>{
+  message.value = '';
+  blurOut();
+  quoteInput.classList.remove('visible');
+
+})
+
+// Posting quote
+postQuote.addEventListener('click',(event)=>{
+  if(message.value != ''){
+
+ 
+  message.value = '';
+  loaderIn();
+  quoteInput.classList.remove('visible');
+
+  
+  const content = {quote:message.textContent}
+  fetch (`/posts`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json; charset=UTF-8',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(content)
+        
+    }).then((data)=>{
+      return data.json();
+    }).then((jsonData)=>{
+    if(jsonData.status === 'success'){
+      window.location.href = '/yourPosts'
+    }
+    }).catch(err => console.log(err));
+
+  }
+  });
+
+
+  message.addEventListener("keyup", function() {
+    const charLength = message.textContent.length;
+    charCount.textContent = `${charLength}/140 characters`;
+    // Optional: Disable submit button or display warning message if character limit is exceeded
+    if (charLength > 140) {
+      charCount.classList.add("text-red-500"); // Add red color class
+     
+      postQuote.classList.add('hidden');
+    } else {
+      charCount.classList.remove("text-red-500"); // Remove red color class
+      postQuote.classList.remove('hidden');
+
+    }
+  });
+</script>
+<!-- <script src="/js/load.js"></script> -->

@@ -1,0 +1,561 @@
+<section id="tops" class="h-svh w-full  bg-blg">
+  <!-- Top  -->
+  <header style="z-index: 1;"  id="fhead" toId="<%= toId %>" class="cursor-pointer flex flex-col justify-end  py-1  overflow-hidden fixed top-0 bottom-[87svh]  sm:bottom-[87svh] overscroll-y-none left-0 right-0   bg-blm">
+    <div class="flex w-full py-1 px-2 justify-between rounded-full">
+      <div class="flex  h-3 w-3  justify-between bg-blb rounded-full">
+      </div>
+      <div class="flex  h-3 w-3  justify-between bg-blt rounded-full">
+      </div>
+      <div class="flex  h-3 w-3  justify-between bg-blb rounded-full">
+      </div>
+      <div class="flex  h-3 w-3  justify-between bg-blt rounded-full">
+      </div>
+      <div class="flex  h-3 w-3  justify-between bg-blb rounded-full">
+      </div>
+      <div class="flex  h-3 w-3  justify-between bg-blb rounded-full">
+      </div>
+      <div class="flex  h-3 w-3  justify-between bg-blt rounded-full">
+      </div>
+      <div class="flex  h-3 w-3  justify-between bg-blb rounded-full">
+      </div>
+      <div class="flex  h-3 w-3  justify-between bg-blt rounded-full">
+      </div>
+      <div class="flex  h-3 w-3  justify-between bg-blb rounded-full">
+      </div>
+      
+      
+
+    </div>
+    
+  </div>
+    <div class=" h-16 flex justify-between items-center  w-full">
+    <div class="flex items-center gap-2 px-4">
+      <a id="back" href="/messages">
+        <svg id="backIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5 3 12m0 0 7.5-7.5M3 12h18" />
+        </svg>
+      </a>
+    
+          <img id="fprofilePic" class="profilePic w-12 h-12 rounded-full" src="" alt="" />
+          <div>
+            <h1 id="fname" class="name text-sm text-black font-semibold">Dummy</h1>
+            <div class="flex items-center justify-start gap-1">
+              <div style="background: #676B73;" id="dot" class="h-2 w-2  rounded-full"></div>
+              <p style="color: #676B73;" id="state" class="text-xs">Offline</p>
+            </div>
+          </div>
+        </div>
+        <div id="navBtn" class="cursor-pointer h-full  flex justify-center items-center text-center px-4">
+          <svg id="navIcon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-black more">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
+          </svg>
+        </div>
+  
+  </header>
+
+
+ 
+      <!-- <div id="tempMsg" class=" flex-col flex justify-center items-center w-full h-full ">
+        <h1 class="font-[600] text-lg z-10 ">Start Chat Now!</h1>
+        <p class=" text-blt font-[500] z-10 text-sm">Say them hi, everyone has one life...</p>
+       </div>
+       -->
+
+  <!-- Mid  -->
+
+  <div id="custom" class=" <%= custom %>  fixed top-16  bottom-20 left-0 right-0 flex  w-full flex-col justify-center items-center ">
+    <div class="flex flex-col justify-center items-center mb-20 ">
+     <img src="/bg/chat.png"  alt="" class="w-32 h-32">
+     <h1 class="font-[600] text-xl">Say them Hi!</h1>
+     <h1 class="text-blt text-center ">Share your thoughts, you have only one life</h1>
+    </div>
+   </div>
+
+
+ 
+  <section  id="chatSection" class=" <%= allChat %> flex flex-col-reverse  overflow-y-scroll bg-blg gap-2 fixed top-[8svh] py-8 px-2 bottom-[5svh] left-0 right-0">
+    <% if (message.length > 0) { %>
+    <% message.forEach(message => { %>
+    <% if (message.sid === userId) { %>
+    <div uid="<%= message._id %>" rid="<%= message.chatId %>" sid="<%= userId %>" id="sMsg" class="px-2   py-1 flex flex-col items-end justify-end gap-1">
+      <h1 class="text-xs bg-white px-3 py-2 shadow-black shadow-sm break-words rounded-2xl rounded-br-sm max-w-10/12">
+        <%= message.content %>
+      </h1>
+      <span class="text-[8px]"><%= message.time %></span>
+    </div>
+    <% } %>
+
+    <% if (message.sid != userId && message.fid === userId) { %>
+    <div uid="<%= message._id %>" rid="<%= message.chatId %>" sid="<%= message.fid %>" id="rMsg" class="px-2 py-1 flex flex-col items-start justify-start gap-1">
+      <h1 class="text-xs bg-white px-3 py-2 shadow-black shadow-sm break-words rounded-2xl rounded-bl-sm max-w-10/12">
+        <%= message.content %>
+      </h1>
+      <span class="text-[8px]"><%= message.time %></span>
+    </div>
+    <% } %>
+    <% }) %>
+    <% } %>
+  </section>
+ 
+
+  <!-- Bottom  -->
+  <footer id="extraInfo" lmt="<%= createdAt %>" tid="<%= tid %>" rname="dummy"  rid="<%= chatId %>" sname="<%= userName %>" sid="<%= userId %>" class="flex justify-between px-2 items-center fixed border-b-2 border-b-blg  bottom-0 left-0 right-0 py-1  bg-blm border overflow-hidden border-blb">
+    <textarea id="sendMsg" name="" placeholder="Thingking..." id="" rows="2" style="outline: none; border: none; white-space: break-spaces" class="outline-none text-decoration-none bg-blm px-2 py-1 text-blt w-10/12 "></textarea>
+    <div class="flex justify-between items-center gap-6">
+
+      <svg id="sendBtn" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-12  text-blf rounded-md px-2 py-3">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
+      </svg>
+    </div>
+  </footer>
+</section>
+
+<%- include('./partials/blurBox.ejs') %>
+<%- include('./partials/loader') %>
+<%- include('./partials/navChat.ejs') %>
+<%- include('./partials/warningBox.ejs') %>
+
+<script src="/js/localStorage.js"></script>
+<script src="/js/scrollFetch.js"></script>
+<script>
+
+
+
+
+
+
+
+function getLocalTimeString(createdAt) {
+    const then = new Date(createdAt);
+    const now = Date.now();
+    const differenceInMs = now - then;
+  
+    const hours = Math.floor(differenceInMs / (1000 * 60 * 60));
+    const days = Math.floor(differenceInMs / (1000 * 60 * 60 * 24));
+  
+    if (days > 0) {
+      return `${days} day${days > 1 ? 's' : ''} ago`;
+    } else {
+      // Include options for desired time format
+      const options = {
+        timeZone: 'Asia/Kolkata',
+        hour: 'numeric', // Display hours as numbers
+        minute: '2-digit', // Pad minutes with leading zeros if needed
+        hour12: true   // Use 12-hour format (e.g., 2:40 PM)
+      };
+      const thenTimeString = then.toLocaleTimeString('en-IN', options);
+      return thenTimeString;
+    }
+  }
+
+
+  let lastMsg = '';
+  let lastMsgTime = '';
+
+
+const friendName =  document.getElementById('fname');
+const friendPic =  document.getElementById('fprofilePic');
+const tempMsg = document.getElementById('tempMsg');
+const fhead = document.getElementById('fhead');
+const back = document.getElementById('back');
+const backIcon = document.getElementById('backIcon');
+const dot = document.getElementById('dot');
+const state = document.getElementById('state');
+const custom = document.getElementById('custom');
+
+
+// block user click 
+block.addEventListener('click',(event)=>{
+let toId = block.getAttribute('toId');
+blockUserFun(toId);
+});
+
+
+
+fhead.addEventListener('click',(event)=>{
+if(event.target != navBtn && event.target != back && event.target != backIcon && event.target != navIcon){
+let href = fhead.getAttribute('toId');
+window.location.href = `/users/${href}`;
+}});
+
+const localData = getLocalData();
+
+
+friendName.innerHTML = localData.name;
+friendPic.src = `/img/${localData.profilePic}`;
+ 
+  const sendInput = document.getElementById("sendMsg"); // Get the input element
+ 
+  const chatSection = document.getElementById("chatSection"); // Get the chat section
+  const sendButton = document.getElementById("sendBtn"); // Get the send button (image)
+  const extraInfo = document.getElementById("extraInfo");
+  let rid = extraInfo.getAttribute("rid");
+    sendInput.addEventListener('focus',(event)=>{
+      let device = "";
+      window.addEventListener('resize',(event)=>{
+     device = "phone";
+      });
+
+    setTimeout(() => {
+      if(device == 'phone'){
+       fhead.classList.remove('bottom-[87svh]');
+       fhead.classList.add('bottom-[47svh]');
+      custom.classList.remove("top-16");
+    return
+      }
+    }, 400);
+   
+  
+  
+  });
+
+    window.addEventListener('resize', (event) => {
+    if(fhead.classList.contains('bottom-[47svh]')){
+    setTimeout(() => {
+    fhead.classList.add('bottom-[87svh]');
+    fhead.classList.remove('bottom-[47svh]');
+    custom.classList.add("top-16");
+    sendInput.blur();
+      }, 200);
+    }
+  });
+  
+
+ 
+
+  if(rid === ''){
+    rid  = localData.rid;
+  }
+  extraInfo.setAttribute('rname' , localData.name)
+  let rname = extraInfo.getAttribute("rname");
+
+  const sid = extraInfo.getAttribute("sid");
+  const sname = extraInfo.getAttribute("sname");
+  const tid = extraInfo.getAttribute("tid");
+  // Websocket code
+  // Send MSG to Socket
+    // const socket = new WebSocket(`ws://localhost:3000/?tid=${tid}&rid=${rid}`);
+    
+    const socket = new WebSocket(`wss://msg-io.onrender.com/?tid=${tid}&rid=${rid}`);
+   
+
+  function sendSocket() {
+    let messageContent = {
+      content:sendInput.value.trim(),
+      rid: rid,
+      rname:rname,
+      sid: sid,
+      sname:sname,
+    };
+    messageContent = JSON.stringify(messageContent);
+    socket.send(messageContent);
+  }
+
+  // Function to create and add a new message
+  function appendMsg(side, radius, messageData,time) {
+    const message = messageData;
+    if (message) {
+      const newMessageDiv = document.createElement("div");
+      newMessageDiv.id = "sMsg";
+      newMessageDiv.classList.add("w-full");
+
+      const messageContentDiv = document.createElement("div");
+      messageContentDiv.classList.add(
+        "px-2",
+        "py-1",
+        "flex",
+        "flex-col",
+        `${side}`,
+        "gap-1"
+      );
+      const timeDiv = document.createElement("span");
+      timeDiv.textContent = time;
+      timeDiv.classList.add(
+        "text-[8px]" , "timeSpan"
+      )
+
+      const messageText = document.createElement("h1");
+      messageText.textContent = message;
+      messageText.classList.add(
+        "text-xs",
+        "bg-white",
+        "px-3",
+        "py-2",
+        "shadow-black",
+        "shadow-sm",
+        "break-words",
+        "rounded-2xl",
+        `${radius}`,
+        "max-w-64"
+      );
+
+      messageContentDiv.appendChild(messageText);
+      messageContentDiv.appendChild(timeDiv);
+      newMessageDiv.appendChild(messageContentDiv);
+      chatSection.insertBefore(newMessageDiv,chatSection.firstChild);
+      sendInput.value = ""; // Clear the input field
+    }
+  }
+
+
+  // scroll to bootom on send or receive the message
+  function scrollToSet() {
+    chatSection.scrollTop = chatSection.scrollHeight; // Scroll to bottom
+  }
+  if (chatSection.scrollHeight > 500) {
+    scrollToSet();
+  }
+
+  // ----------------------------------------------Receiving Data---------------------------------------------
+
+  // Recive MSG from Socket
+  function receiveSocket(data) {
+    const content = data.content;
+    const senderId = data.senderId;
+    return;
+  }
+
+
+
+
+
+
+  socket.addEventListener("message", function(event) {
+    const data = JSON.parse(event.data);
+    if(rid === `${data.id}-${sid}` || rid === `${sid}-${data.id}` ){
+   if(data.state === 'Online'){
+    state.innerText = 'Online';
+    dot.style.background = "#4E61EA";
+    state.style.color = "#4E61EA";
+   }
+  
+if(data.state === 'Offline'){
+ 
+  state.innerText = 'Offline';
+    dot.style.background = "#676B73";
+    state.style.color = "#676B73";
+  
+ 
+}
+
+
+  }  
+  
+    
+if(data.onlineOnly){
+  
+data.onlineOnly.forEach(el => {
+  if(rid === `${el}-${sid}` || rid === `${sid}-${el}`){
+  
+    state.innerText = 'Online';
+    dot.style.background = "#4E61EA";
+    state.style.color = "#4E61EA";
+  }
+  else{
+    state.innerText = 'Offline';
+    dot.style.background = "#676B73";
+    state.style.color = "#676B73";
+
+  }
+}); 
+}
+  
+    receiveSocket(data);
+    const messageData = data.content;
+   let time = Date.now();
+   time = getLocalTimeString(time);
+    appendMsg("items-start", "rounded-bl-sm",messageData , time);
+   if(data.content){
+    if(!custom.classList.contains('hidden')){
+        custom.classList.add('hidden');
+        if(chatSection.classList.contains('hidden')){
+          chatSection.classList.remove('hidden')
+        }
+      }
+      if(chatSection.classList.contains('hidden')){
+        chatSection.classList.remove('hidden')
+      }
+   }
+    scrollToSet();
+  });
+
+  // -------------------------------------- Sending Data ------------------------------------------------
+  // Event listener for Enter key press
+  sendInput.addEventListener("keyup", (event) => {
+    if (event.keyCode === 13 && sendInput.offsetWidth > 340 && sendInput.value.trim() != '') {
+      event.preventDefault();
+      let time =  Date.now();
+      lastMsgTime = time;
+         lastMsg = sendInput.value.trim();       
+      time = getLocalTimeString(time);
+      sendSocket();
+      const messageData = sendInput.value.trim(); // Get the trimmed message value
+      appendMsg("items-end", "rounded-br-sm", messageData, time);
+      if (chatSection.scrollHeight > 600) {
+        scrollToSet();
+      }
+      if(!custom.classList.contains('hidden')){
+        custom.classList.add('hidden');
+        if(chatSection.classList.contains('hidden')){
+          chatSection.classList.remove('hidden')
+        }
+      }
+      if(chatSection.classList.contains('hidden')){
+        chatSection.classList.remove('hidden')
+      }
+      
+      sendInput.focus();
+    }
+  });
+
+
+// fetching messages on scroll
+let lmt = extraInfo.getAttribute('lmt');
+function convertToISO8601(dateString) {
+  const date = new Date(dateString);
+  return date.toISOString();
+}
+lmt = convertToISO8601(lmt)
+const messagesPerPage = 20;
+
+
+
+
+
+  // Function to create and add a new message
+  function fetchAppend(side, radius, messageData,time) {
+    const message = messageData;
+    if (message) {
+      const newMessageDiv = document.createElement("div");
+      newMessageDiv.id = "sMsg";
+      newMessageDiv.classList.add("w-full");
+
+      const messageContentDiv = document.createElement("div");
+      messageContentDiv.classList.add(
+        "px-2",
+        "py-1",
+        "flex",
+        "flex-col",
+        `${side}`,
+        "gap-1"
+      );
+      const timeDiv = document.createElement("span");
+      timeDiv.textContent = time;
+      timeDiv.classList.add(
+        "text-[8px]" , "timeSpan"
+      )
+
+      const messageText = document.createElement("h1");
+      messageText.textContent = message;
+      messageText.classList.add(
+        "text-xs",
+        "bg-white",
+        "px-3",
+        "py-2",
+        "shadow-black",
+        "shadow-sm",
+        "break-words",
+        "rounded-2xl",
+        `${radius}`,
+        "max-w-64"
+      );
+
+      messageContentDiv.appendChild(messageText);
+      messageContentDiv.appendChild(timeDiv);
+      newMessageDiv.appendChild(messageContentDiv);
+      chatSection.appendChild(newMessageDiv,chatSection.firstChild);
+      
+    }
+  }
+
+let isLoading = false;
+let hasMoreMessages = true;
+
+function fetchMessages(page,limit,href) {
+  isLoading = true;
+  fetch(`/${href}?page=${page}&limit=${limit}`)
+    .then(response => response.json())
+    .then(data => {
+      if (data.messages.length < limit) {
+        hasMoreMessages = false;
+      }
+    isLoading = false;
+  
+data.messages.forEach(el =>{
+  if(el.fid != sid){
+    fetchAppend("items-end", "rounded-br-sm",el.content,getLocalTimeString(el.createdAt));
+  }
+  if(el.fid === sid ){
+    fetchAppend("items-start", "rounded-bl-sm",el.content , getLocalTimeString(el.createdAt));
+  }
+});
+   extraInfo.setAttribute('lmt', data.slmt);
+    })
+    .catch(error => {
+      isLoading = false;
+    });
+}
+function convertToISO8601(data) {
+  // Handle different data types
+  if (typeof data === 'string') {
+    // Attempt to parse the string as a date
+    const date = new Date(data);
+    if (isNaN(date.getTime())) {
+    
+      return null; // Or handle the error as needed
+    }
+    return date.toISOString();
+  } else if (data instanceof Date) {
+    return data.toISOString();
+  } else {
+   
+    return null; // Or handle the error as needed
+  }
+}
+
+
+
+chatSection.addEventListener('scroll', () => {
+  let currentPage = extraInfo.getAttribute('lmt');
+function convertToISO8601(dateString) {
+  const date = new Date(dateString);
+  return date.toISOString();
+}
+
+const threshold = 50; 
+   if(( - chatSection.scrollTop +  chatSection.clientHeight) >= (chatSection.scrollHeight - threshold) && !isLoading && hasMoreMessages ){
+   currentPage = convertToISO8601(currentPage)
+    fetchMessages(currentPage,messagesPerPage,`message/${rid}`);
+}
+});
+  // Event listener for clicking the send button (image)
+  sendButton.addEventListener("click", (event) => {
+    if(sendInput.value.trim() != ''){
+
+   
+    let time = Date.now();
+lastMsgTime = time;
+lastMsg = sendInput.value.trim();
+
+     time =getLocalTimeString(time);
+    sendSocket();
+    const messageData = sendInput.value.trim(); // Get the trimmed message value
+    
+    appendMsg("items-end", "rounded-br-sm",messageData,time);
+    if (chatSection.scrollHeight > 600) {
+      scrollToSet();
+    }
+    if(!custom.classList.contains('hidden')){
+        custom.classList.add('hidden');
+        if(chatSection.classList.contains('hidden')){
+          chatSection.classList.remove('hidden')
+        }
+      }
+      if(chatSection.classList.contains('hidden')){
+        chatSection.classList.remove('hidden')
+      }
+    sendInput.focus();
+
+  }
+  });
+</script>
